@@ -1,11 +1,73 @@
+/* Base variables for light/dark themes */
+:root {
+  --background-light: #ffffff;
+  --text-light: #333333;
+  --primary-light: #005fff;
+  --border-light: lightgray;
+  --message-bg-light: #ffffff;
+  --button-bg-light: #005fff;
+  --button-text-light: white;
+  --button-border-light: #003899;
+  --ai-indicator-light: #005fff;
+  --sidebar-bg-light: #f5f5f5;
+  --header-bg-light: #ffffff;
+
+  --background-dark: #121212;
+  --text-dark: #f1f1f1;
+  --primary-dark: #428dff;
+  --border-dark: #444444;
+  --message-bg-dark: #1e1e1e;
+  --button-bg-dark: #428dff;
+  --button-text-dark: white;
+  --button-border-dark: #2a5899;
+  --ai-indicator-dark: #428dff;
+  --sidebar-bg-dark: #1a1a1a;
+  --header-bg-dark: #1a1a1a;
+}
+
+/* Theme application */
+.light {
+  --background: var(--background-light);
+  --text-color: var(--text-light);
+  --primary-color: var(--primary-light);
+  --border-color: var(--border-light);
+  --message-bg: var(--message-bg-light);
+  --button-bg: var(--button-bg-light);
+  --button-text: var(--button-text-light);
+  --button-border: var(--button-border-light);
+  --ai-indicator: var(--ai-indicator-light);
+  --sidebar-bg: var(--sidebar-bg-light);
+  --header-bg: var(--header-bg-light);
+}
+
+.dark {
+  --background: var(--background-dark);
+  --text-color: var(--text-dark);
+  --primary-color: var(--primary-dark);
+  --border-color: var(--border-dark);
+  --message-bg: var(--message-bg-dark);
+  --button-bg: var(--button-bg-dark);
+  --button-text: var(--button-text-dark);
+  --button-border: var(--button-border-dark);
+  --ai-indicator: var(--ai-indicator-dark);
+  --sidebar-bg: var(--sidebar-bg-dark);
+  --header-bg: var(--header-bg-dark);
+}
+
+/* Base styles that stay the same */
 html,
 body,
 #root {
   height: 100%;
 }
+
 body {
   margin: 0;
+  background-color: var(--background);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
+
 #root {
   display: flex;
   width: 50%;
@@ -24,43 +86,223 @@ body {
 .str-chat__channel-list {
   width: 60%;
 }
+
 .str-chat__channel {
   width: 70%;
 }
+
 .str-chat__thread {
   width: 45%;
 }
 
+/* Your custom components with theme variables */
 .my-channel-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   font: normal;
   padding: 0rem 1rem;
-  border-bottom: 1px solid lightgray;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--header-bg);
+  color: var(--text-color);
 }
 
 .my-channel-header button {
-  background: #005fff;
-  color: white;
+  background: var(--button-bg);
+  color: var(--button-text);
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   border: none;
   cursor: pointer;
 }
 
+.dark .my-channel-header {
+  background-color: var(--header-bg-dark);
+  color: var(--text-dark);
+  border-color: var(--border-dark);
+}
+
 .my-message {
-  border: 1px solid lightgray;
+  border: 1px solid var(--border-color);
+  background-color: var(--message-bg);
+  color: var(--text-color);
   padding: 1rem 1.5rem;
   margin: 0.5rem 1rem;
   border-radius: 0.5rem;
 }
 
 .my-ai-state-indicator {
-  background: #005fff;
-  color: white;
+  background: var(--ai-indicator);
+  color: var(--button-text);
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
-  border: 1px solid #003899;
+  border: 1px solid var(--button-border);
   margin: 1rem;
+}
+
+/* Stream Chat specific dark mode overrides - COLOR ONLY */
+/* General Stream Chat container */
+.dark .str-chat,
+.dark .str-chat.messaging,
+.dark .str-chat.commerce,
+.dark .str-chat.team,
+.dark .str-chat.livestream {
+  --str-chat__primary-color: var(--primary-dark);
+  --str-chat__secondary-color: var(--primary-dark);
+
+  background-color: var(--background-dark);
+  color: var(--text-dark);
+}
+
+/* Headers */
+.dark .str-chat__header-livestream,
+.dark .str-chat__channel-header,
+.dark .str-chat__header-hamburger,
+.dark .str-chat__header-button,
+.dark div[class*="str-chat__header"] {
+  background-color: var(--header-bg-dark);
+  color: var(--text-dark);
+  border-color: var(--border-dark);
+}
+
+/* Channel List & Sidebar */
+.dark .str-chat__channel-list-messenger,
+.dark .str-chat__channel-list,
+.dark .str-chat__channel-list-team,
+.dark .str-chat__channel-sidebar,
+.dark .str-chat__channel-list-header,
+.dark div[class*="str-chat__channel-list"] {
+  background-color: var(--sidebar-bg-dark);
+  color: var(--text-dark);
+  border-color: var(--border-dark);
+}
+
+/* Channel Preview Items */
+.dark .str-chat__channel-preview-messenger,
+.dark .str-chat__channel-preview,
+.dark div[class*="str-chat__channel-preview"] {
+  background-color: var(--sidebar-bg-dark);
+  color: var(--text-dark);
+  border-color: var(--border-dark);
+}
+
+.dark .str-chat__channel-preview-messenger:hover,
+.dark .str-chat__channel-preview:hover,
+.dark div[class*="str-chat__channel-preview"]:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.dark .str-chat__channel-preview--active {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Messages and message list - background only */
+.dark .str-chat__list,
+.dark .str-chat__message-list,
+.dark .str-chat__virtual-list,
+.dark div[class*="str-chat__list"] {
+  background-color: var(--background-dark);
+}
+
+/* Message styling - COLORS ONLY */
+.dark .str-chat__message-simple {
+  /* Don't modify any layout properties */
+}
+
+.dark .str-chat__message-simple__actions {
+  background-color: var(--background-dark);
+}
+
+.dark .str-chat__message-bubble {
+  background: var(--message-bg-dark) !important;
+}
+
+/* Message bubble text - COLORS ONLY */
+.dark .str-chat__message-text-inner {
+  background-color: var(--message-bg-dark);
+  color: var(--text-dark);
+}
+
+.dark .str-chat__message-simple-text-inner {
+  color: var(--text-dark);
+}
+
+.dark .str-chat__message-commerce__text {
+  background-color: var(--message-bg-dark);
+  color: var(--text-dark);
+}
+
+.dark .str-chat__message-simple__content {
+  color: var(--text-dark);
+}
+
+.dark .str-chat__message-reply-content {
+  color: var(--text-dark);
+}
+
+.dark .str-chat__message-team__content {
+  color: var(--text-dark);
+}
+
+/* Message attachment styling */
+.dark .str-chat__message-attachment {
+  background-color: var(--message-bg-dark);
+  color: var(--text-dark);
+}
+
+/* Message input */
+.dark .str-chat__input,
+.dark .str-chat__input-flat,
+.dark .str-chat__textarea,
+.dark .str-chat__small-message-input,
+.dark .str-chat__message-input,
+.dark div[class*="str-chat__input"] {
+  background-color: var(--message-bg-dark);
+  color: var(--text-dark);
+  border-color: var(--border-dark);
+}
+
+/* Threads */
+.dark .str-chat__thread,
+.dark .str-chat__thread-header,
+.dark .str-chat__thread-list,
+.dark div[class*="str-chat__thread"] {
+  background-color: var(--background-dark);
+  color: var(--text-dark);
+  border-color: var(--border-dark);
+}
+
+/* Date separators */
+.dark .str-chat__date-separator,
+.dark .str-chat__date-separator-date {
+  color: var(--text-dark);
+}
+
+/* Theme toggle button styling */
+.theme-toggle {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.dark .theme-toggle {
+  color: var(--text-dark);
+}
+
+.light .theme-toggle {
+  color: var(--text-light);
+}
+
+.theme-toggle:hover {
+  background-color: rgba(128, 128, 128, 0.1);
+}
+
+/* Force immediate application of theme to all elements */
+.dark * {
+  transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease;
 }
