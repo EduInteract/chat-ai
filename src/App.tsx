@@ -3,7 +3,7 @@ import type {
   ChannelSort,
   ChannelFilters,
   ChannelOptions,
-} from 'stream-chat';
+} from "stream-chat";
 import {
   useCreateChatClient,
   Chat,
@@ -13,32 +13,35 @@ import {
   MessageList,
   Thread,
   Window,
-} from 'stream-chat-react';
+} from "stream-chat-react";
 
-import 'stream-chat-react/dist/css/v2/index.css';
-import MyChannelHeader from './MyChannelHeader';
-import MyAIStateIndicator from './MyAIStateIndicator';
+import "stream-chat-react/dist/css/v2/index.css";
+import MyChannelHeader from "./MyChannelHeader";
+import MyAIStateIndicator from "./MyAIStateIndicator";
 
-const apiKey = 'ufpeh85fmchn';
-const userId = 'anakin_skywalker';
-const userName = 'Anakin Skywalker';
+//dark mode
+import { ThemeProvider } from "./contexts/ThemeContext";
+
+const apiKey = "ufpeh85fmchn";
+const userId = "anakin_skywalker";
+const userName = "Anakin Skywalker";
 const userToken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYW5ha2luX3NreXdhbGtlciJ9.ZwCV1qPrSAsie7-0n61JQrSEDbp6fcMgVh4V2CB0kM8';
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYW5ha2luX3NreXdhbGtlciJ9.ZwCV1qPrSAsie7-0n61JQrSEDbp6fcMgVh4V2CB0kM8";
 
 if (!apiKey || !userToken) {
-  throw new Error('Missing API key or user token');
+  throw new Error("Missing API key or user token");
 }
 
 const user: User = {
   id: userId,
   name: userName,
   image:
-    'https://vignette.wikia.nocookie.net/starwars/images/6/6f/Anakin_Skywalker_RotS.png',
+    "https://vignette.wikia.nocookie.net/starwars/images/6/6f/Anakin_Skywalker_RotS.png",
 };
 
 const sort: ChannelSort = { last_message_at: -1 };
 const filters: ChannelFilters = {
-  type: 'messaging',
+  type: "messaging",
   members: { $in: [userId] },
 };
 const options: ChannelOptions = {
@@ -55,18 +58,20 @@ const App = () => {
   if (!client) return <div>Setting up client & connection...</div>;
 
   return (
-    <Chat client={client}>
-      <ChannelList filters={filters} sort={sort} options={options} />
-      <Channel>
-        <Window>
-          <MyChannelHeader />
-          <MessageList />
-          <MyAIStateIndicator />
-          <MessageInput />
-        </Window>
-        <Thread />
-      </Channel>
-    </Chat>
+    <ThemeProvider>
+      <Chat client={client}>
+        <ChannelList filters={filters} sort={sort} options={options} />
+        <Channel>
+          <Window>
+            <MyChannelHeader />
+            <MessageList />
+            <MyAIStateIndicator />
+            <MessageInput />
+          </Window>
+          <Thread />
+        </Channel>
+      </Chat>
+    </ThemeProvider>
   );
 };
 
